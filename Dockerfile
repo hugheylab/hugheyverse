@@ -7,16 +7,16 @@ ENV TZ=America/Chicago
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && echo $TZ > /etc/timezone \
-  && apt update \
-  && apt upgrade \
-  && apt install -y \
+  && apt-get update \
+  && apt-get upgrade -y \
+  && apt-get install -y \
   curl \
   git \
   libcurl4-gnutls-dev \
   libssh2-1-dev \
   libssl-dev \
   libxml2-dev \
-  && apt clean \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && install.r BiocManager \
   && install.r drat \
