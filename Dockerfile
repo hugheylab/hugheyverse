@@ -22,7 +22,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && install.r drat \
   && echo "drat::addRepo('hugheylab')" >> ~/.Rprofile \
   && echo "drat::addRepo('hugheylab')" >> /etc/R/Rprofile.site \
-  && r -e "setRepositories(ind = c(1:5, 9)); install.packages(c('metapredict', 'zeitzeiger', 'deltaccd', 'limorhyde', 'tipa', 'simphony'), type = 'source', quiet = TRUE)" \
+  && r -e "BiocManager::install(c('metapredict', 'zeitzeiger', 'deltaccd', 'limorhyde', 'tipa', 'simphony'), ask = FALSE)" \
   && rm -rf /tmp/downloaded_packages
 
 RUN wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb \
