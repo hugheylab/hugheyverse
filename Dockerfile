@@ -1,4 +1,4 @@
-FROM r-base:latest
+FROM r-base:3.6.3
 
 LABEL author="Jake Hughey" \
   email="jakejhughey@gmail.com"
@@ -25,16 +25,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
   && r -e "BiocManager::install(c('metapredict', 'zeitzeiger', 'deltaccd', 'limorhyde', 'tipa', 'simphony'), ask = FALSE)" \
   && rm -rf /tmp/downloaded_packages
 
-RUN wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb \
-   && dpkg -i pandoc-2.9.2.1-1-amd64.deb \
-   && rm -rf pandoc-2.9.2.1-1-amd64.deb
+RUN wget https://github.com/jgm/pandoc/releases/download/2.10/pandoc-2.10-1-amd64.deb \
+   && dpkg -i pandoc-2.10-1-amd64.deb \
+   && rm -rf pandoc-2.10-1-amd64.deb
 
 ENV PATH=/miniconda3/bin:${PATH}
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
    && bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda3 -b \
    && rm -rf Miniconda3-latest-Linux-x86_64.sh \
-   && conda update -y conda \
-   && conda install -y -c conda-forge -c bioconda snakemake
+   && conda install -c conda-forge mamba \
+   && mamba create -c conda-forge -c bioconda -n snakemake snakemake
 
 CMD ["/bin/bash"]
