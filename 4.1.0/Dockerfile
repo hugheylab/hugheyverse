@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:4.0.2
+FROM rocker/tidyverse:4.1.0
 
 LABEL author="Jake Hughey" \
   email="jakejhughey@gmail.com"
